@@ -145,5 +145,19 @@ vite.config.ts.timestamp-*
 # Astro generated types
 .astro/
 
+# Expo local files
+.expo/
+expo-env.d.ts
+
+# Local signing credentials
+*.jks
+*.keystore
+*.p8
+*.p12
+*.mobileprovision
+
+# macOS files
+.DS_Store
+
 # Turbo Repo
 .turbo
