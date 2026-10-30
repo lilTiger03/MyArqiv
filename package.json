@@ -1,10 +1,13 @@
 {
-  "name": "storyverse58",
-  "version": "1.0.0",
+  "name": "myarqiv",
   "main": "expo-router/entry",
+  "version": "1.0.0",
   "dependencies": {
     "@expo/ui": "~58.0.24",
+    "@react-native-community/slider": "5.2.1",
+    "@supabase/supabase-js": "^2.118.0",
     "expo": "~58.0.20",
+    "expo-application": "~58.1.2",
     "expo-constants": "~58.0.13",
     "expo-device": "~58.0.5",
     "expo-font": "~58.0.10",
@@ -12,23 +15,30 @@
     "expo-image": "~58.0.17",
     "expo-linking": "~58.0.14",
     "expo-router": "~58.0.27",
+    "expo-secure-store": "~58.0.2",
     "expo-splash-screen": "~58.0.11",
     "expo-status-bar": "~58.0.4",
     "expo-symbols": "~58.0.4",
     "expo-system-ui": "~58.0.6",
+    "expo-video": "~58.0.13",
     "expo-web-browser": "~58.0.7",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-native": "0.88.0",
+    "react-native": "0.88.1",
     "react-native-gesture-handler": "~3.3.0",
     "react-native-reanimated": "4.7.1",
     "react-native-safe-area-context": "~5.10.1",
     "react-native-screens": "~4.30.0",
+    "react-native-url-polyfill": "^4.0.0",
     "react-native-web": "~0.21.4",
+    "react-native-webview": "14.0.1",
     "react-native-worklets": "0.13.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.13",
     "@types/react": "~19.3.0",
+    "eslint": "^9.0.0",
+    "eslint-config-expo": "~58.0.0",
     "typescript": "~6.0.3"
   },
   "scripts": {
@@ -37,7 +47,18 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "server": "node --env-file-if-exists=server/.env server/index.mjs",
+    "test:server": "node --test server/catalogue.test.mjs",
+    "test:feed": "node --test src/lib/catalogue-feed.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "test:youtube": "node --test server/videos.test.mjs src/lib/youtube.test.mjs",
+    "test:permissions": "node --test supabase/tests/permissions.test.mjs",
+    "test:session": "node --test src/lib/chunked-storage.test.mjs",
+    "test:clips": "node --test src/lib/clip-playback.test.mjs src/lib/native-playback.test.mjs"
   },
-  "private": true
+  "private": true,
+  "engines": {
+    "node": ">=24"
+  }
 }

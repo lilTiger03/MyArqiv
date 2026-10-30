@@ -1,180 +1,40 @@
 import { Image } from 'expo-image';
-import { SymbolView } from 'expo-symbols';
-import { Platform, Pressable, ScrollView, StyleSheet } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ClipCreditDetails } from '@/components/clip-credits';
+import { nativeClipSamples } from '@/lib/native-clip-samples';
+import { Linking, Pressable, Text, View } from 'react-native';
+import { AppShell, Icon, SectionTitle, ui, palette } from '@/components/catalogue-ui';
 
-import { ExternalLink } from '@/components/external-link';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Collapsible } from '@/components/ui/collapsible';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
-
-export default function TabTwoScreen() {
-  const safeAreaInsets = useSafeAreaInsets();
-  const insets = {
-    ...safeAreaInsets,
-    bottom: safeAreaInsets.bottom + BottomTabInset + Spacing.three,
-  };
-  const theme = useTheme();
-
-  const contentPlatformStyle = Platform.select({
-    android: {
-      paddingTop: insets.top,
-      paddingLeft: insets.left,
-      paddingRight: insets.right,
-      paddingBottom: insets.bottom,
-    },
-    web: {
-      paddingTop: Spacing.six,
-      paddingBottom: Spacing.four,
-    },
-  });
-
+export default function AboutScreen() {
   return (
-    <ScrollView
-      style={[styles.scrollView, { backgroundColor: theme.background }]}
-      contentInset={insets}
-      contentContainerStyle={[styles.contentContainer, contentPlatformStyle]}>
-      <ThemedView style={styles.container}>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="subtitle">Explore</ThemedText>
-          <ThemedText style={styles.centerText} themeColor="textSecondary">
-            This starter app includes example{'\n'}code to help you get started.
-          </ThemedText>
-
-          <ExternalLink href="https://docs.expo.dev" asChild>
-            <Pressable style={({ pressed }) => pressed && styles.pressed}>
-              <ThemedView type="backgroundElement" style={styles.linkButton}>
-                <ThemedText type="link">Expo documentation</ThemedText>
-                <SymbolView
-                  tintColor={theme.text}
-                  name={{ ios: 'arrow.up.right.square', android: 'link', web: 'link' }}
-                  size={12}
-                />
-              </ThemedView>
-            </Pressable>
-          </ExternalLink>
-        </ThemedView>
-
-        <ThemedView style={styles.sectionsWrapper}>
-          <Collapsible title="File-based routing">
-            <ThemedText type="small">
-              This app has two screens: <ThemedText type="code">src/app/index.tsx</ThemedText> and{' '}
-              <ThemedText type="code">src/app/explore.tsx</ThemedText>
-            </ThemedText>
-            <ThemedText type="small">
-              The layout file in <ThemedText type="code">src/app/_layout.tsx</ThemedText> sets up
-              the tab navigator.
-            </ThemedText>
-            <ExternalLink href="https://docs.expo.dev/router/introduction">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
-            </ExternalLink>
-          </Collapsible>
-
-          <Collapsible title="Android, iOS, and web support">
-            <ThemedView type="backgroundElement" style={styles.collapsibleContent}>
-              <ThemedText type="small">
-                You can open this project on Android, iOS, and the web. To open the web version,
-                press <ThemedText type="smallBold">w</ThemedText> in the terminal running this
-                project.
-              </ThemedText>
-              <Image
-                source={require('@/assets/images/tutorial-web.png')}
-                style={styles.imageTutorial}
-              />
-            </ThemedView>
-          </Collapsible>
-
-          <Collapsible title="Images">
-            <ThemedText type="small">
-              For static images, you can use the <ThemedText type="code">@2x</ThemedText> and{' '}
-              <ThemedText type="code">@3x</ThemedText> suffixes to provide files for different
-              screen densities.
-            </ThemedText>
-            <Image source={require('@/assets/images/react-logo.png')} style={styles.imageReact} />
-            <ExternalLink href="https://reactnative.dev/docs/images">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
-            </ExternalLink>
-          </Collapsible>
-
-          <Collapsible title="Light and dark mode components">
-            <ThemedText type="small">
-              This template has light and dark mode support. The{' '}
-              <ThemedText type="code">useColorScheme()</ThemedText> hook lets you inspect what the
-              user&apos;s current color scheme is, and so you can adjust UI colors accordingly.
-            </ThemedText>
-            <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-              <ThemedText type="linkPrimary">Learn more</ThemedText>
-            </ExternalLink>
-          </Collapsible>
-
-          <Collapsible title="Animations">
-            <ThemedText type="small">
-              This template includes an example of an animated component. The{' '}
-              <ThemedText type="code">src/components/ui/collapsible.tsx</ThemedText> component uses
-              the powerful <ThemedText type="code">react-native-reanimated</ThemedText> library to
-              animate opening this hint.
-            </ThemedText>
-          </Collapsible>
-        </ThemedView>
-        {Platform.OS === 'web' && <WebBadge />}
-      </ThemedView>
-    </ScrollView>
+    <AppShell active="Profile">
+      <Text style={ui.kicker}>MADE FOR THE LOVE OF STORIES</Text>
+      <Text style={ui.heading}>Your films.{'\n'}<Text style={ui.editorial}>Your world.</Text></Text>
+      <Text style={[ui.body, ui.introduction]}>A home for everything you want to watch, wherever it comes from.</Text>
+      <Text style={[ui.body, { marginBottom: 30 }]}>Discover films and series, build your watchlist and explore cinema beyond the familiar.</Text>
+      <SectionTitle title="Film & television data" />
+      <Image source={require('@/assets/images/tmdb-logo.svg')} style={{ width: 145, height: 28, marginVertical: 12 }} contentFit="contain" accessibilityLabel="The Movie Database" />
+      <Text style={ui.body}>This product uses the TMDB API but is not endorsed or certified by TMDB.</Text>
+      <Pressable accessibilityRole="link" onPress={() => Linking.openURL('https://www.themoviedb.org')}
+        style={({ pressed }) => [ui.chip, { alignSelf: 'flex-start', marginTop: 20, flexDirection: 'row', gap: 10, alignItems: 'center' }, pressed && ui.pressed]}>
+        <Text style={ui.chipText}>Visit TMDB</Text><Icon name="arrow" size={15} />
+      </Pressable>
+      <View style={{ marginTop: 30 }}>
+        <SectionTitle title="Trailers & songs" caption="YouTube" />
+        <Text style={ui.body}>Movie-page trailers and songs play through YouTube. The uploader controls availability, and YouTube may show ads. Open in YouTube to use your account in the YouTube app.</Text>
+        <Pressable accessibilityRole="link" onPress={() => Linking.openURL('https://www.youtube.com/t/terms')} style={{ paddingVertical: 12, minHeight: 44 }}><Text style={[ui.body, { color: palette.accent }]}>YouTube Terms of Service ↗</Text></Pressable>
+        <Pressable accessibilityRole="link" onPress={() => Linking.openURL('https://policies.google.com/privacy')} style={{ paddingVertical: 12, minHeight: 44 }}><Text style={[ui.body, { color: palette.accent }]}>Google Privacy Policy ↗</Text></Pressable>
+      </View>
+      <View style={{ marginTop: 30, gap: 20 }}>
+        <SectionTitle title="Clips · sources & rights" caption="Open-film samples" />
+        <Text style={ui.body}>The current Clips demo uses Blender’s openly licensed film trailers, streamed directly from the official source. These samples do not play through YouTube. Their creator, source and licence details are also available through each clip’s information button.</Text>
+        {nativeClipSamples.map(clip => <ClipCreditDetails key={clip.id} clip={clip} />)}
+      </View>
+      <View style={{ marginTop: 36 }}>
+        <SectionTitle title="An independent student project" />
+        <Text style={ui.body}>Built while studying Computer Engineering at USN. This is an independent portfolio project, not an official university product.</Text>
+        <Text style={[ui.meta, { marginTop: 20 }]}>Early development · Accounts, friends and direct recommendations are available. Reviews, discussions and personalised discovery are still to come.</Text>
+      </View>
+      <View style={ui.footer}><Icon name="globe" color={palette.accent} size={17} /><Text style={ui.meta}>Great cinema speaks every language.</Text></View>
+    </AppShell>
   );
 }
-
-const styles = StyleSheet.create({
-  scrollView: {
-    flex: 1,
-  },
-  contentContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  container: {
-    maxWidth: MaxContentWidth,
-    flexGrow: 1,
-  },
-  titleContainer: {
-    gap: Spacing.three,
-    alignItems: 'center',
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.six,
-  },
-  centerText: {
-    textAlign: 'center',
-  },
-  pressed: {
-    opacity: 0.7,
-  },
-  linkButton: {
-    flexDirection: 'row',
-    paddingHorizontal: Spacing.four,
-    paddingVertical: Spacing.two,
-    borderRadius: Spacing.five,
-    justifyContent: 'center',
-    gap: Spacing.one,
-    alignItems: 'center',
-  },
-  sectionsWrapper: {
-    gap: Spacing.five,
-    paddingHorizontal: Spacing.four,
-    paddingTop: Spacing.three,
-  },
-  collapsibleContent: {
-    alignItems: 'center',
-  },
-  imageTutorial: {
-    width: '100%',
-    aspectRatio: 296 / 171,
-    borderRadius: Spacing.three,
-    marginTop: Spacing.two,
-  },
-  imageReact: {
-    width: 100,
-    height: 100,
-    alignSelf: 'center',
-  },
-});

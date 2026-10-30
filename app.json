@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "StoryVerse58",
-    "slug": "StoryVerse58",
+    "name": "myArqiv",
+    "slug": "myarqiv",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -28,15 +28,28 @@
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#208AEF",
+          "backgroundColor": "#151515",
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 76
         }
-      ]
+      ],
+      "expo-secure-store",
+      "expo-video"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "609bcd29-28b9-4ef0-9944-86cac5f6efc5"
+      }
+    },
+    "owner": "myarqiv"
   }
 }
